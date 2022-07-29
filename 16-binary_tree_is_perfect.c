@@ -8,20 +8,20 @@
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	size_t l_full = 0, r_full = 0, l_height = 0, r_height = 0;
+	size_t left_bool = 0, right_bool = 0, left_height = 0, right_height = 0;
 
 	if (!tree)
 		return (0);
 	if (!tree->left || !tree->right)
 		return (0);
 
-	l_full = binary_tree_is_full(tree->left);
-	r_full = binary_tree_is_full(tree->right);
+	left_bool = binary_tree_is_full(tree->left);
+	right_bool = binary_tree_is_full(tree->right);
 
-	l_height = binary_tree_height(tree->left);
-	r_height = binary_tree_height(tree->right);
+	left_height = binary_tree_height(tree->left);
+	right_height = binary_tree_height(tree->right);
 
-	if (l_full == r_full && l_height == r_height)
+	if (left_bool == right_bool && left_height == right_height)
 		return (1);
 	return (0);
 }
@@ -33,21 +33,16 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 */
 int binary_tree_is_full(const binary_tree_t *tree)
 {
-	/**size_t l_full = 0, r_full = 0;**/
+	size_t left_bool = 0, right_bool = 0;
 
 	if (!tree)
 		return (0);
 	if (!tree->left && !tree->right)
 		return (1);
-	/**
-	*l_full = 1 + binary_tree_is_full(tree->left);
-	*r_full = 1 + binary_tree_is_full(tree->right);
-	*if (l_full == r_full)
-	*	return (1);
-	*return (0);
-	**/
-	if ((tree->left) && (tree->right))
-		return (binary_tree_is_full(tree->left) && binary_tree_is_full(tree->right));
+	left_bool = 1 + binary_tree_is_full(tree->left);
+	right_bool = 1 + binary_tree_is_full(tree->right);
+	if (left_bool == right_bool)
+		return (1);
 	return (0);
 }
 
@@ -60,15 +55,15 @@ int binary_tree_is_full(const binary_tree_t *tree)
 
 size_t binary_tree_height(const binary_tree_t *tree)
 {
-	size_t height_l = 0, height_r = 0;
+	size_t left_height = 0, right_height = 0;
 
 	if (!tree)
 		return (0);
 	if (!tree->left && !tree->right)
 		return (0);
-	height_l = binary_tree_height(tree->left);
-	height_r = binary_tree_height(tree->right);
-	if (height_l >= height_r)
-		return (height_l + 1);
-	return (height_r + 1);
+	left_height = binary_tree_height(tree->left);
+	right_height = binary_tree_height(tree->right);
+	if (left_height >= right_height)
+		return (left_height + 1);
+	return (right_height + 1);
 }
